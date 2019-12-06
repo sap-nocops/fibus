@@ -83,9 +83,6 @@ MainView {
         stopNames = [];
         var justOne = false;
         http.onreadystatechange = function() {
-        	console.log(http.readyState);
-        	justOne = http.readyState == 1;
-        	console.log(justOne);
             if (http.readyState == 4) {
                 if (http.status == 200) {
                     stops = JSON.parse(http.responseText);
@@ -107,12 +104,6 @@ MainView {
     }
 
     function busError(http) {
-    	if (http) {
-    		console.log("error: " + http.status);
-	        console.log(http.statusText);
-    	} else {
-    		console.log("Here I am");
-    	}
         showErrorContainer("Errore nel recupero delle fermate", root.errors.STOP);
     }
 
@@ -170,7 +161,6 @@ MainView {
         http.onreadystatechange = function() {
             if (http.readyState == 4) {
                 if (http.status == 200) {
-                	console.log("WTF");
                     showBusContainer();
                     populateBusList(JSON.parse(http.responseText).s);
                     fillSearchText(selectedStop.n);
@@ -431,17 +421,17 @@ MainView {
 	                                    function formatBus(d, number, finalStop) {
 	                                        var delay = parseInt(d);
 	                                        if (delay > -1) {
-	                                        	//TODO get dst offset
-	                                        	var dstOffset = 2;
-	                                            var utcOffset = dstOffset * 60 * 60 * 1000;
-	                                            var today = new Date();
-	                                            today.setHours(0);
-	                                            today.setMinutes(0);
-	                                            today.setSeconds(0);
-	                                            var realTime = new Date(today.getTime() + delay + utcOffset);
-	                                            var min = realTime.getMinutes();
+                                                var localizedHour = parseInt(new Date().toLocaleTimeString(Qt.locale("it_IT"), "hh"));
+                                                delay = delay / 1000;
+                                                var hours = parseInt(delay / 3600);
+                                                var hourShift = localizedHour - hours;
+                                                if (hourShift > 0 ) {
+                                                    hours += hourShift;
+                                                } else {
+                                                    hours += 1;
+                                                }
+                                                var min = parseInt((delay % 3600) / 60);
 	                                            min = (min > 9) ? min : '0' + min;
-	                                            var hours = realTime.getHours();
 	                                            hours = (hours > 9) ? hours : '0' + hours;
 	                                            return hours + ':' + min + ' ' + number + ' ' + finalStop;
 	                                        }

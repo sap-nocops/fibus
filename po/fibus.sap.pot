@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fibus.sap\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-23 20:02+0000\n"
+"POT-Creation-Date: 2019-12-06 16:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../qml/build/install/Main.qml:181 ../qml/Main.qml:231
+#: ../qml/Main.qml:221
 msgid "Nessuna Fermata Trovata"
 msgstr ""
 
-#: ../qml/build/install/Main.qml:398 ../qml/Main.qml:448
+#: ../qml/Main.qml:438
 msgid "Nessun Bus Trovato"
 msgstr ""
 
