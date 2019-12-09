@@ -421,15 +421,10 @@ MainView {
 	                                    function formatBus(d, number, finalStop) {
 	                                        var delay = parseInt(d);
 	                                        if (delay > -1) {
-                                                var localizedHour = parseInt(new Date().toLocaleTimeString(Qt.locale("it_IT"), "hh"));
+                                                var offset = new Date().getTimezoneOffset();
                                                 delay = delay / 1000;
                                                 var hours = parseInt(delay / 3600);
-                                                var hourShift = localizedHour - hours;
-                                                if (hourShift > 0 ) {
-                                                    hours += hourShift;
-                                                } else {
-                                                    hours += 1;
-                                                }
+                                                hours +=  0 - (offset / 60);
                                                 var min = parseInt((delay % 3600) / 60);
 	                                            min = (min > 9) ? min : '0' + min;
 	                                            hours = (hours > 9) ? hours : '0' + hours;
